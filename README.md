@@ -22,10 +22,6 @@ This will be fully, 100% managed by AWS.  It will have:
 * Only support SFTP
 * AWS Manages users. This limits you to _only_ keys.
 
-## Fully Managed, Private
-
-Same as above but with an endpoint in a VPC. This allows attaching a SG for whitelisting IP's.
-
 ## Lambda for Authentication (Secrets)
 
 If you want to allow people to use passwords, you need to handle it yourself.  Essentailly, Transfer calls a Lambda, and that Lambda can do whatever you want it to.
