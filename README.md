@@ -7,6 +7,13 @@ AWS Transfer is both kind of cool, and kind of a pain.
 
 There's lots of different ways to set it up, but I'm going to walk through just a few that I want to explore.
 
+
+### Notes
+A couple of notes:
+
+* This is not intended to be an amazing example of Terraform, etc.  My goal is to learn a little more about AWS Transfer, so messy code is just fine.
+* I'm playing around with cline, so some of this code will be generated there.
+
 ## Fully Managed
 
 This will be fully, 100% managed by AWS.  It will have:
