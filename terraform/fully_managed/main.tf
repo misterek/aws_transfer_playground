@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "5.68.0" # Versions after this currently have issues with M1 Macs
     }
   }
 }
@@ -96,7 +96,18 @@ resource "aws_transfer_user" "sftp_user" {
   server_id      = aws_transfer_server.sftp_server.id 
   user_name      = each.key
   role           = aws_iam_role.sftp_shared_role.arn
-  home_directory = each.value.home_directory
+  #home_directory = each.value.home_directory
+
+  # A couple of ways to restrict this. Could add a policy to the user (to restrict from the main role),
+  # Or can restrict the home directory.  This will drop the user into the apparent "/", directory, which
+  # is actually mapped to "/home/username" in the bucket.  This should restrict users from seeing other
+  # user's files.
+  # Ignoring the named home directory in the variable.
+  home_directory_type = "LOGICAL"
+  home_directory_mappings {
+    entry  = "/"
+    target = "/${each.value.bucket_name}/home/$${Transfer:UserName}"
+  }
 
   tags = {
     Name = each.key

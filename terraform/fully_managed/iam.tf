@@ -36,8 +36,7 @@ resource "aws_iam_policy" "sftp_shared_policy" {
         "Action": [
           "s3:GetObject",
           "s3:PutObject",
-          "s3:DeleteObject",
-          "s3:ListObjects"
+          "s3:DeleteObject"
         ],
         "Resource": [
           for bucket in local.unique_buckets : "arn:aws:s3:::${bucket}/*"
